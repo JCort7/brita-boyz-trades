@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>BRITA BOYZ — Doug’s Deal Factory</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="titleBlock">
+      <h1>BRITA BOYZ</h1>
+      <p>Doug’s Deal Factory</p>
+    </div>
+
+    <button id="newTradeBtn" class="primary">Enter New Trade Proposal</button>
+  </header>
+
+  <main class="wrap">
+    <!-- Modal -->
+    <div id="modalBackdrop" class="backdrop hidden"></div>
+    <section id="tradeModal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modalHeader">
+        <h2>Suggest a deal</h2>
+        <button id="closeModalBtn" class="iconBtn" aria-label="Close">✕</button>
+      </div>
+
+      <form id="tradeForm" class="form">
+        <label>
+          <span>We Receive</span>
+          <input id="weReceive" type="text" placeholder="e.g., 2026 4th round" maxlength="120" required />
+        </label>
+
+        <label>
+          <span>We Offer</span>
+          <input id="weOffer" type="text" placeholder="e.g., Isaiah Pacheco" maxlength="120" required />
+        </label>
+
+        <div class="row">
+          <div class="segLabel">Winner (according to the bible)</div>
+          <div class="seg">
+            <input type="radio" name="winner" id="winnerUs" value="us" checked />
+            <label for="winnerUs">Us</label>
+
+            <input type="radio" name="winner" id="winnerThem" value="them" />
+            <label for="winnerThem">Them</label>
+          </div>
+        </div>
+
+        <label>
+          <span>Notes</span>
+          <input id="notes" type="text" placeholder="Optional" maxlength="180" />
+        </label>
+
+        <button type="submit" class="primary wide">Submit</button>
+      </form>
+    </section>
+
+    <!-- Feed -->
+    <section class="card">
+      <div class="cardHeader">
+        <h2>Doug’s To Do</h2>
+        <p class="subtle">Newest trades appear first. Approvals update live.</p>
+      </div>
+
+      <div id="tradeList" class="list"></div>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
