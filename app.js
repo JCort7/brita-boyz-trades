@@ -43,7 +43,19 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const auth = getAuth(app);
-await signInAnonymously(auth); // keeps it simple for public access
+const toast = document.getElementById("toast");
+function showError(msg){
+  toast.textContent = msg;
+  toast.classList.remove("hidden");
+  setTimeout(() => toast.classList.add("hidden"), 7000);
+}
+
+try {
+  await signInAnonymously(auth);
+} catch (err) {
+  console.error(err);
+  showError("Auth error: " + (err?.message || err));
+} // keeps it simple for public access
 
 // UI refs
 const newTradeBtn = document.getElementById("newTradeBtn");
@@ -77,6 +89,33 @@ modalBackdrop.addEventListener("click", closeModal);
 // Create trade
 tradeForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  try {
+    // Build approvals object (all unchecked at creation)
+    const approvals = {};
+    for (const o of OWNERS) approvals[o] = false;
+
+    // Optional: winner field (only if you have this input in your HTML)
+    const winnerEl = document.querySelector('input[name="winner"]:checked');
+    const winner = winnerEl ? winnerEl.value : "";
+
+    // Create the trade doc
+    await addDoc(collection(db, "trades"), {
+      weSend: weOfferEl.value.trim(),
+      weReceive: weReceiveEl.value.trim(),
+      winner,
+      notes: notesEl.value.trim(),
+      approvals,
+      createdAt: serverTimestamp(),
+    });
+
+    closeModal();
+    tradeForm.reset();
+  } catch (err) {
+    console.error(err);
+    showError("Submit error: " + (err?.message || err));
+  }
+});
 
   const winner = document.querySelector('input[name="winner"]:checked')?.value ?? "us";
 
