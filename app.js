@@ -5,10 +5,29 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-/**
- * 1) Replace firebaseConfig with YOUR config from Firebase console
- * 2) Enable Firestore + Anonymous Auth (steps below)
- */
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAWt2kxrKuLNvE-GZGlMrS6aFNm39myzsk",
+    authDomain: "brita-boyz-trades.firebaseapp.com",
+    projectId: "brita-boyz-trades",
+    storageBucket: "brita-boyz-trades.firebasestorage.app",
+    messagingSenderId: "571942229076",
+    appId: "1:571942229076:web:4b01436d4a3949e47f89c1",
+    measurementId: "G-RZLDQ61015"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 const firebaseConfig = {
   apiKey: "PASTE_YOURS",
   authDomain: "PASTE_YOURS",
